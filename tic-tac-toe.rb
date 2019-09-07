@@ -1,7 +1,7 @@
 class Board
     def initialize
       @tile = [["1","2","3"],["4","5","6"],["7","8","9"]]
-      @coord = {1=>[0,0], 2=>[0,1], 3=>[0,2], 4=>[1,0], 5=>[1,1], 6=>[1,2], 7=>[2,0], 8=>[2,1], 9=>[2,2]}
+   
     end
 
     def display
@@ -32,9 +32,10 @@ class Board
     def checkWin(player)
         win = false
         3.times do |x|
-            if @tile[x][0] == player && @tile[x][1] == player && @tile[x][2]
+            puts x
+            if @tile[x][0] == player && @tile[x][1] == player && @tile[x][2] == player
                 win = true
-            elsif @tile[0][x] == player && @tile[1][x] == player && @tile[2][x]
+            elsif @tile[0][x] == player && @tile[1][x] == player && @tile[2][x] == player
                 win = true
             end
         end
@@ -43,7 +44,16 @@ class Board
         elsif @tile[0][2] == player && @tile[1][1] == player && @tile[2][0] == player
             win = true
         end
-        
+        return win
+    end
+
+    def newGame        
+        puts "New game? (y,n)"
+        answer = gets.chomp
+        if answer == "y" || answer == "Y"
+            board = Board.new()
+            board.play
+        end
     end
 
     def play
@@ -77,19 +87,13 @@ class Board
             display
             if checkWin(player)
                 puts "Player #{player} Wins"
-                puts "New game? (y,n)"
-                newGame = gets.chomp
-                if newGame == "y"
-                    board = Board.new()
-                    board.play
-                else
-                    break
-                end
+                newGame
             end
             turn += 1
             if turn > 9
                 game = "off"
                 puts " TIE  Game over"
+                newGame
             end
         end
     end    
