@@ -1,7 +1,6 @@
 class Board
     def initialize
-      @tile = [["1","2","3"],["4","5","6"],["7","8","9"]]
-   
+      @tile = [["1","2","3"],["4","5","6"],["7","8","9"]]  
     end
 
     def display
@@ -31,15 +30,15 @@ class Board
 
     def checkWin(player)
         win = false
-        3.times do |x|
-            puts x
-            if @tile[x][0] == player && @tile[x][1] == player && @tile[x][2] == player
+        3.times do |x|                                     
+            if @tile[x][0] == player && @tile[x][1] == player && @tile[x][2] == player    #Check rows/columns for win
                 win = true
             elsif @tile[0][x] == player && @tile[1][x] == player && @tile[2][x] == player
                 win = true
             end
-        end
-        if @tile[0][0] == player && @tile[1][1] == player && @tile[2][2] == player
+        end 
+                         
+        if @tile[0][0] == player && @tile[1][1] == player && @tile[2][2] == player        #Check diagonals for win
             win = true
         elsif @tile[0][2] == player && @tile[1][1] == player && @tile[2][0] == player
             win = true
